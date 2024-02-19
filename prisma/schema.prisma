@@ -9,3 +9,32 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Author {
+  id                String    @id @db.Uuid
+  email             String    @unique @db.VarChar
+  name              String    @db.VarChar
+  posts             Post[]
+  createdAt         DateTime  @db.Timestamp(6)
+  createdBy         String?   @db.Uuid
+  updatedAt         DateTime? @db.Timestamp(6)
+  updatedBy         String?   @db.Uuid
+  isActiveChangedAt DateTime? @db.Timestamp(6)
+  isActiveChangedBy String?   @db.Uuid
+}
+
+model Post {
+  id                String    @id @db.Uuid
+  title             String    @db.VarChar
+  slug              String    @unique @db.VarChar
+  content           String    @db.Text
+  createdAt         DateTime  @db.Timestamp(6)
+  createdBy         String?   @db.Uuid
+  updatedAt         DateTime? @db.Timestamp(6)
+  updatedBy         String?   @db.Uuid
+  isActiveChangedAt DateTime? @db.Timestamp(6)
+  isActiveChangedBy String?   @db.Uuid
+
+  author   Author @relation(fields: [authorId], references: [id])
+  authorId String @db.Uuid
+}
