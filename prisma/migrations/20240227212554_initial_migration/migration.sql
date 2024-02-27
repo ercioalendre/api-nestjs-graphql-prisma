@@ -1,8 +1,9 @@
 -- CreateTable
-CREATE TABLE "Author" (
+CREATE TABLE "User" (
     "id" UUID NOT NULL,
     "email" VARCHAR NOT NULL,
     "name" VARCHAR NOT NULL,
+    "role" VARCHAR NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL,
     "createdBy" UUID,
     "updatedAt" TIMESTAMP(6),
@@ -10,7 +11,7 @@ CREATE TABLE "Author" (
     "isActiveChangedAt" TIMESTAMP(6),
     "isActiveChangedBy" UUID,
 
-    CONSTRAINT "Author_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -31,10 +32,10 @@ CREATE TABLE "Post" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Author_email_key" ON "Author"("email");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Post_slug_key" ON "Post"("slug");
 
 -- AddForeignKey
-ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "Author"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
