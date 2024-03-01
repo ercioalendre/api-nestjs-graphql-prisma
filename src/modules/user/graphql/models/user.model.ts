@@ -5,30 +5,30 @@ export class User {
   @Field(() => ID)
   public readonly id: string;
 
-  @Field()
+  @Field(() => String)
   public readonly email: string;
 
-  @Field()
+  @Field(() => String)
   public readonly name: string;
 
-  @Field()
+  @Field(() => String)
   public readonly role: string;
 
-  @Field()
+  @Field(() => Date)
   public readonly createdAt: Date;
 
-  @Field()
+  @Field(() => String, { nullable: true })
   public readonly createdBy?: string | null;
 
-  @Field()
+  @Field(() => Date, { nullable: true })
   public readonly updatedAt?: Date | null;
 
-  @Field()
+  @Field(() => String, { nullable: true })
   public readonly updatedBy?: string | null;
 
-  @Field()
+  @Field(() => Date, { nullable: true })
   public readonly isActiveChangedAt?: Date | null;
 
-  @Field()
+  @Field(() => String, { nullable: true })
   public readonly isActiveChangedBy?: string | null;
 }
