@@ -1,4 +1,4 @@
-export interface UserBaseOutputDto {
+export class UserBaseOutputDto {
   id: string;
   email: string;
   name: string;
@@ -7,6 +7,6 @@ export interface UserBaseOutputDto {
   createdBy?: string | null;
   updatedAt?: Date | null;
   updatedBy?: string | null;
-  isActiveChangedAt?: string | null;
+  isActiveChangedAt?: Date | null;
   isActiveChangedBy?: string | null;
 }

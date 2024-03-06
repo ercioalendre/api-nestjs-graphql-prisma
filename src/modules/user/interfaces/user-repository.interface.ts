@@ -1,26 +1,28 @@
-import { CreateOneUserInputDto } from '@/modules/user/dtos/create-one-user-input.dto';
-import { CreateOneUserOutputDto } from '@/modules/user/dtos/create-one-user-output.dto';
-import { UpdateOneUserInputDto } from '@/modules/user/dtos/update-one-user-input.dto';
-import { UpdateOneUserOutputDto } from '@/modules/user/dtos/update-one-user-output.dto';
-import { GetOneUserOutputDto } from '@/modules/user/dtos/get-one-user-output.dto';
-import { GetManyUserInputDto } from '@/modules/user/dtos/get-many-user-input.dto';
-import { GetManyUserOutputDto } from '@/modules/user/dtos/get-many-user-output.dto';
-import { DeleteOneUserOutputDto } from '@/modules/user/dtos/delete-one-user-output.dto';
+import { CreateOneUserModelInputDto } from '@/modules/user/dtos/input/create-one-user-model-input.dto';
+import { CreateOneUserModelOutputDto } from '@/modules/user/dtos/output/create-one-user-model-output.dto';
+import { GetOneUserModelOutputDto } from '@/modules/user/dtos/output/get-one-user-model-output.dto';
+import { GetManyUserModelOutputDto } from '@/modules/user/dtos/output/get-many-user-model-output.dto';
+import { UpdateOneUserModelInputDto } from '@/modules/user/dtos/input/update-one-user-model-input.dto';
+import { UpdateOneUserModelOutputDto } from '@/modules/user/dtos/output/update-one-user-model-output.dto';
+import { DeleteOneUserModelOutputDto } from '@/modules/user/dtos/output/delete-one-user-model-output.dto';
 
 export interface UserRepositoryInterface {
   createOne(
-    createOneUserInputDto: CreateOneUserInputDto,
-  ): Promise<CreateOneUserOutputDto>;
+    createOneUserModelInputDto: CreateOneUserModelInputDto,
+  ): Promise<CreateOneUserModelOutputDto>;
 
-  getOneById(id: string): Promise<GetOneUserOutputDto>;
+  getOne(filter: Record<string, unknown>): Promise<GetOneUserModelOutputDto>;
+
+  getOneById(id: string): Promise<GetOneUserModelOutputDto>;
 
   getMany(
-    getManyUserInputDto: GetManyUserInputDto,
-  ): Promise<GetManyUserOutputDto[]>;
+    searchParams?: Record<string, unknown> | null,
+  ): Promise<GetManyUserModelOutputDto>;
 
   updateOne(
-    updateOneUserInputDto: UpdateOneUserInputDto,
-  ): Promise<UpdateOneUserOutputDto>;
+    id: string,
+    updateOneUserModelInputDto: UpdateOneUserModelInputDto,
+  ): Promise<UpdateOneUserModelOutputDto>;
 
-  deleteOneById(id: string): Promise<DeleteOneUserOutputDto>;
+  deleteOneById(id: string): Promise<DeleteOneUserModelOutputDto>;
 }
