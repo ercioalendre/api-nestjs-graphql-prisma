@@ -6,13 +6,12 @@ import {
 } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
-let retryCounter = 0;
-
 @Injectable()
 export class PrismaService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy
 {
+  private retryCounter = 0;
   private readonly retryDelay = 5000;
   private readonly logger = new Logger(PrismaService.name);
 
@@ -36,10 +35,10 @@ export class PrismaService
     } catch (error) {
       this.logger.error(`Failed to connect to the database: ${error}`);
 
-      retryCounter++;
+      this.retryCounter++;
 
       this.logger.log(
-        `Retrying database connection in ${this.retryDelay / 1000} seconds... (${retryCounter})`,
+        `Retrying database connection in ${this.retryDelay / 1000} seconds... (${this.retryCounter})`,
       );
 
       await new Promise((resolve) => setTimeout(resolve, this.retryDelay));

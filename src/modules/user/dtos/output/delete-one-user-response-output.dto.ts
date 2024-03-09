@@ -1,3 +1,34 @@
-import { UserBaseOutputDto } from './user-base-output.dto';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-export class DeleteOneUserResponseOutputDto extends UserBaseOutputDto {}
+@ObjectType()
+export class DeleteOneUserResponseOutputDto {
+  @Field(() => ID)
+  public readonly id: string;
+
+  @Field(() => String)
+  public readonly email: string;
+
+  @Field(() => String)
+  public readonly name: string;
+
+  @Field(() => String)
+  public readonly role: string;
+
+  @Field(() => Date)
+  public readonly createdAt: Date;
+
+  @Field(() => String, { nullable: true })
+  public readonly createdBy?: string | null;
+
+  @Field(() => Date, { nullable: true })
+  public readonly updatedAt?: Date | null;
+
+  @Field(() => String, { nullable: true })
+  public readonly updatedBy?: string | null;
+
+  @Field(() => Date, { nullable: true })
+  public readonly isActiveChangedAt?: Date | null;
+
+  @Field(() => String, { nullable: true })
+  public readonly isActiveChangedBy?: string | null;
+}

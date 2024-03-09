@@ -25,14 +25,16 @@ export class UpdateOneUserService {
 
     const { email } = updateOneUserRequestInputDto;
 
-    const existingUserByEmail = await this.userPrismaRepository.getOne({
-      email,
-    });
+    if (email) {
+      const existingUserByEmail = await this.userPrismaRepository.getOne({
+        email,
+      });
 
-    if (existingUserByEmail) {
-      throw new ConflictException(
-        'An user with the given email already exists.',
-      );
+      if (existingUserByEmail) {
+        throw new ConflictException(
+          'An user with the given email already exists.',
+        );
+      }
     }
 
     const updateOneUserModelInputDto: UpdateOneUserModelInputDto = {

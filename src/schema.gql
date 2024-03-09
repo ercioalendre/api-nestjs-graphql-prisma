@@ -28,7 +28,78 @@ type GetManyUserResponseOutputDto {
   totalRecords: Int!
 }
 
+type CreateOneUserResponseOutputDto {
+  id: ID!
+  email: String!
+  name: String!
+  role: String!
+  createdAt: DateTime!
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  isActiveChangedAt: DateTime
+  isActiveChangedBy: String
+}
+
+type GetOneUserResponseOutputDto {
+  id: ID!
+  email: String!
+  name: String!
+  role: String!
+  createdAt: DateTime!
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  isActiveChangedAt: DateTime
+  isActiveChangedBy: String
+}
+
+type DeleteOneUserResponseOutputDto {
+  id: ID!
+  email: String!
+  name: String!
+  role: String!
+  createdAt: DateTime!
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  isActiveChangedAt: DateTime
+  isActiveChangedBy: String
+}
+
+type UpdateOneUserResponseOutputDto {
+  id: ID!
+  email: String!
+  name: String!
+  role: String!
+  createdAt: DateTime!
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  isActiveChangedAt: DateTime
+  isActiveChangedBy: String
+}
+
 type Query {
   healthCheck: String!
-  getManyUser(page: Int, perPage: Int, filterBy: String, filterValue: String, sortBy: String, sortOrder: String): GetManyUserResponseOutputDto!
+  getOneUserByIdQuery(id: String!): GetOneUserResponseOutputDto!
+  getManyUserQuery(page: Int, perPage: Int, filterBy: String, filterValue: String, sortBy: String, sortOrder: String): GetManyUserResponseOutputDto!
+}
+
+type Mutation {
+  createOneUserMutation(createOneUserInput: CreateOneUserInput!): CreateOneUserResponseOutputDto!
+  updateOneUserMutation(id: String!, updateOneUserInput: UpdateOneUserInput!): UpdateOneUserResponseOutputDto!
+  deleteOneUserByIdQuery(id: String!): DeleteOneUserResponseOutputDto!
+}
+
+input CreateOneUserInput {
+  email: String!
+  name: String!
+  role: String!
+}
+
+input UpdateOneUserInput {
+  email: String
+  name: String
+  role: String
 }
